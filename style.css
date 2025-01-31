@@ -1,0 +1,266 @@
+/*body {
+  margin: 0;
+}*/
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width:100%;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+#av1 {
+  width: 140px; /* Largura do botão */
+  height: 220px; /* Altura do botão */
+  font-size: 15px; /* Tamanho da fonte para tornar o texto mais visível */
+  padding: 0; /* Espaçamento interno */
+  line-height: 410px; /* Move o texto para baixo */
+  background-color:  rgba(76, 175, 80, 0.5);  /*transparent; Fundo completamente transparente */
+  color: black; /* Cor do texto */
+  border: none; /* Remove a borda padrão */
+  border-radius: 10px; /* Deixa o botão com cantos arredondados */
+  cursor: pointer; /* Mostra o ícone de mão ao passar o mouse */
+ 
+  position: absolute;
+  top: 10px; /* Distância do topo da página */
+  left: 1200px; /* Distância do lado esquerdo */
+  
+}
+
+#av1:hover {
+  background-color: transparent; /* Cor ao passar o mouse */
+}
+
+
+#av2 {
+  width: 160px; /* Largura do botão */
+  height: 220px; /* Altura do botão */
+  font-size: 15px; /* Tamanho da fonte para tornar o texto mais visível */
+  padding: 0; /* Espaçamento interno */
+  line-height: 410px; /* Move o texto para baixo */
+  background-color: rgba(76, 175, 80, 0.5);  /* transparent; Fundo completamente transparente */
+  color: black; /* Cor do texto */
+  border: none; /* Remove a borda padrão */
+  border-radius: 10px; /* Deixa o botão com cantos arredondados */
+  cursor: pointer; /* Mostra o ícone de mão ao passar o mouse */
+ 
+  position: absolute;
+  top: 10px; /* Distância do topo da página */
+  left: 1350px; /* Distância do lado esquerdo */
+  
+}
+
+#av2:hover {
+  background-color: transparent; /* Cor ao passar o mouse */
+}
+
+#av3 {
+  width: 140px; /* Largura do botão */
+  height: 220px; /* Altura do botão */
+  font-size: 15px; /* Tamanho da fonte para tornar o texto mais visível */
+  padding: 0; /* Espaçamento interno */
+  line-height: 410px; /* Move o texto para baixo */
+  background-color:  rgba(76, 175, 80, 0.5);  /*transparent; Fundo completamente transparente */
+  color: black; /* Cor do texto */
+  border: none; /* Remove a borda padrão */
+  border-radius: 10px; /* Deixa o botão com cantos arredondados */
+  cursor: pointer; /* Mostra o ícone de mão ao passar o mouse */
+ 
+  position: absolute;
+  top: 240px; /* Distância do topo da página */
+  left: 1200px; /* Distância do lado esquerdo */
+  
+}
+
+#av3:hover {
+  background-color: transparent; /* Cor ao passar o mouse */
+}
+
+#av4 {
+  width: 160px; /* Largura do botão */
+  height: 220px; /* Altura do botão */
+  font-size: 15px; /* Tamanho da fonte para tornar o texto mais visível */
+  padding: 0; /* Espaçamento interno */
+  line-height: 410px; /* Move o texto para baixo */
+  background-color: rgba(76, 175, 80, 0.5);  /* transparent; Fundo completamente transparente */
+  color: black; /* Cor do texto */
+  border: none; /* Remove a borda padrão */
+  border-radius: 10px; /* Deixa o botão com cantos arredondados */
+  cursor: pointer; /* Mostra o ícone de mão ao passar o mouse */
+ 
+  position: absolute;
+  top: 240px; /* Distância do topo da página */
+  left: 1350px; /* Distância do lado esquerdo */
+  
+}
+
+#av4:hover {
+  background-color: transparent; /* Cor ao passar o mouse */
+}
+
+#av5 {
+  width: 180px; /* Largura do botão */
+  height: 220px; /* Altura do botão */
+  font-size: 15px; /* Tamanho da fonte para tornar o texto mais visível */
+  padding: 0; /* Espaçamento interno */
+  line-height: 410px; /* Move o texto para baixo */
+  background-color: rgba(76, 175, 80, 0.5);  /* transparent; Fundo completamente transparente */
+  color: black; /* Cor do texto */
+  border: none; /* Remove a borda padrão */
+  border-radius: 10px; /* Deixa o botão com cantos arredondados */
+  cursor: pointer; /* Mostra o ícone de mão ao passar o mouse */
+ 
+  position: absolute;
+  top: 480px; /* Distância do topo da página */
+  left: 1255px; /* Distância do lado esquerdo */
+  
+}
+
+#av5:hover {
+  background-color: transparent; /* Cor ao passar o mouse */
+}
+
+#salvar {
+  font-size: 15px; /* Tamanho da fonte para tornar o texto mais visível */
+  padding: 5px 10px; /* Espaçamento interno (ajustado para tornar o botão mais compacto) */
+  
+  background-color:   rgba(76, 175, 80, 0.5);   /* Fundo completamente transparente */
+  border-radius: 10px; /* Deixa o botão com cantos arredondados */
+  cursor: pointer; /* Mostra o ícone de mão ao passar o mouse */
+  
+  position: absolute;
+  top: 10px; /* Distância do topo da página */
+  left: 1090px; /* Distância do lado esquerdo */
+  
+  /* O width vai se ajustar automaticamente ao conteúdo */
+  white-space: nowrap; /* Garante que o texto não quebre em várias linhas *//
+  
+}
+
+#salvar:hover {
+  background-color: transparent; /* Cor ao passar o mouse */
+}
+
+#carregar {
+  font-size: 15px; /* Tamanho da fonte para tornar o texto mais visível */
+  padding: 5px 10px; /* Espaçamento interno (ajustado para tornar o botão mais compacto) */
+  
+  background-color:   rgba(76, 175, 80, 0.5);   /* Fundo completamente transparente */
+  border-radius: 10px; /* Deixa o botão com cantos arredondados */
+  cursor: pointer; /* Mostra o ícone de mão ao passar o mouse */
+  
+  position: absolute;
+  top: 10px; /* Distância do topo da página */
+  left: 920px; /* Distância do lado esquerdo */
+  
+  /* O width vai se ajustar automaticamente ao conteúdo */
+  white-space: nowrap; /* Garante que o texto não quebre em várias linhas *//
+  
+}
+
+#carregar:hover {
+  background-color: transparent; /* Cor ao passar o mouse */
+}
+
+/* Posição do slider X */
+#x {
+  position: absolute;
+  top: 360px;  /* Altere essa propriedade para mover o slider para cima ou para baixo */
+  left: 10px;  /* Altere essa propriedade para mover o slider para a esquerda ou direita */
+  width: 200px;  /* Largura do slider */
+}
+
+/* Posição do slider Y */
+#y {
+  position: absolute;
+  top: 420px;  /* Altere essa propriedade para mover o slider para cima ou para baixo */
+  left: 10px;  /* Altere essa propriedade para mover o slider para a esquerda ou direita */
+  width: 200px;  /* Largura do slider */
+}
+
+/* Posição do slider Y */
+#scale {
+  position: absolute;
+  top: 480px;  /* Altere essa propriedade para mover o slider para cima ou para baixo */
+  left: 10px;  /* Altere essa propriedade para mover o slider para a esquerda ou direita */
+  width: 200px;  /* Largura do slider */
+}
+
+#rotation {
+  font-size: 15px; /* Tamanho da fonte para tornar o texto mais visível */
+  padding: 5px 10px; /* Espaçamento interno (ajustado para tornar o botão mais compacto) */
+  
+  border-radius: 10px; /* Deixa o botão com cantos arredondados */
+  cursor: pointer; /* Mostra o ícone de mão ao passar o mouse */
+  
+  position: absolute;
+  top: 550px; /* Distância do topo da página */
+  left: 10px; /* Distância do lado esquerdo */
+  
+  /* O width vai se ajustar automaticamente ao conteúdo */
+  white-space: nowrap; /* Garante que o texto não quebre em várias linhas */
+}
+
+#texture {
+  font-size: 15px; /* Tamanho da fonte para tornar o texto mais visível */
+  padding: 5px 10px; /* Espaçamento interno (ajustado para tornar o botão mais compacto) */
+  
+  border-radius: 10px; /* Deixa o botão com cantos arredondados */
+  cursor: pointer; /* Mostra o ícone de mão ao passar o mouse */
+  
+  position: absolute;
+  top: 600px; /* Distância do topo da página */
+  left: 10px; /* Distância do lado esquerdo */
+  
+  /* O width vai se ajustar automaticamente ao conteúdo */
+  white-space: nowrap; /* Garante que o texto não quebre em várias linhas */
+}
+
+/* Container para os botões */
+.button-container {
+  position: absolute;
+  top: 10px;  
+  left: 10px; 
+  width: 200px;
+  height: 200px;
+  border: 2px solid #888; /* Cinza */
+  border-radius: 15px; /* Arredondamento do container */
+  overflow-y: auto; /* Scroll vertical */
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background: white;
+
+  /* Garante que o conteúdo dentro do container também siga o arredondamento */
+  scrollbar-width: thin; /* Para Firefox */
+  scrollbar-color: #aaa #f4f4f4; /* Para Firefox */
+}
+
+
+/* Estilo dos botões */
+.button-container button {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.button-container button:hover {
+  background-color: #0056b3;
+}

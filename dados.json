@@ -1,0 +1,46 @@
+[
+  {
+    "tipoArv": 0,
+    "matrix": {
+      "positionX": 3,
+      "positionY": -3,
+      "positionZ": 0,
+      "scaleX": 1.4782072305679321,
+      "scaleY": 1.600000023841858,
+      "scaleZ": 1.4782072305679321,
+      "rotationXY": 0,
+      "rotationXZ": -0.6122934818267822,
+      "rotationYX": 0,
+      "rotationYZ": 0,
+      "rotationZX": 0.6122934818267822,
+      "rotationZY": 0
+    },
+    "material": {
+      "diffuse": [
+        1,
+        0,
+        0
+      ],
+      "diffuseMap": {},
+      "ambient": [
+        1,
+        1,
+        1
+      ],
+      "specular": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "shininess": 225,
+      "opacity": 1,
+      "emissive": [
+        0,
+        0,
+        0
+      ],
+      "opticalDensity": 1.45,
+      "illum": 2
+    }
+  }
+]
