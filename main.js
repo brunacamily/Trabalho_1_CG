@@ -300,12 +300,9 @@ async function main() {
   `;
 
 
-  // compila e vincula os shaders, localiza os atributos e as localizações dos uniformes
   const meshProgramInfo = twgl.createProgramInfo(gl, [vs, fs]);
 
   const objHref = ["OBJs/Tree 1.obj", "OBJs/Tree2.obj", "OBJs/Tree 3.obj", "OBJs/Tree 4.obj", "OBJs/Tree 5.obj"];  
-
-  //+++++++++++++++++++++++++++++++++
 
   const response1 = [null, null, null, null, null];
   const text1 = [null, null, null, null, null];
@@ -463,17 +460,15 @@ async function main() {
             tipoArv: objetos[i].tipo, // Valor padrão, pode ser alterado conforme necessário
 
              matrix: {
-                // Translação (posição no espaço 3D)
+
               positionX: objetos[i].uniforms.u_world[12],
               positionY: objetos[i].uniforms.u_world[13],
               positionZ: objetos[i].uniforms.u_world[14], 
 
-              // Escala (fatores de escala ao longo de cada eixo)
               scaleX: objetos[i].uniforms.u_world[0],
               scaleY: objetos[i].uniforms.u_world[5],
               scaleZ: objetos[i].uniforms.u_world[10],
 
-              // Rotação (extraída da matriz de rotação)
               rotationXY: objetos[i].uniforms.u_world[1],  // Influência no eixo X e Y
               rotationXZ: objetos[i].uniforms.u_world[2],  // Influência no eixo X e Z
               rotationYX: objetos[i].uniforms.u_world[4],  // Influência no eixo Y e X
@@ -482,46 +477,32 @@ async function main() {
               rotationZY: objetos[i].uniforms.u_world[9],  // Influência no eixo Z e Y
               },
 
-              // ajustar para guardar somente o diffuse !!!!!!!!!
               material: {
                 diffuse: objetos[i].material.diffuse,	
                 diffuseMap: objetos[i].material.diffuseMap,
                 ambient: objetos[i].material.ambient,
                 specular: objetos[i].material.specular, 
                 shininess: objetos[i].material.shininess,
-                opacity: objetos[i].material.opacity, // Se não existir, assume 1
-                emissive: objetos[i].material.emissive , // Se não existir, assume [0, 0, 0]
-                opticalDensity: objetos[i].material.opticalDensity , // Se não existir, assume 1.45
+                opacity: objetos[i].material.opacity, 
+                emissive: objetos[i].material.emissive ,
+                opticalDensity: objetos[i].material.opticalDensity ,
                 illum: objetos[i].material.illum
             }
         };
-
         listaObjetos.push(obj);
     }
-
-    // Converter para JSON
     const jsonString = JSON.stringify(listaObjetos, null, 2);
-    
-    // Criar um blob (arquivo temporário)
     const blob = new Blob([jsonString], { type: 'application/json' });
-    
-    // Criar um link de download
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.download = 'dados.json';
-    
-    // Adicionar o link na página e simular o clique
     document.body.appendChild(link);
     link.click();
-    
-    // Remover o link após o download
     document.body.removeChild(link);
-  
   }
 
   function carregaJSON(objetos) {
 
-    // Criar um input do tipo file para carregar o arquivo
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.json';
@@ -531,15 +512,14 @@ async function main() {
       const reader = new FileReader();
       
       reader.onload = () => {
-        // Parse o JSON para objeto
         const data = JSON.parse(reader.result);
         
         // Aqui, ajusta os objetos carregados conforme a estrutura do arquivo JSON
         for (let i = 0; i < data.length; i++) {
           const objeto = data[i];  // Objeto carregado do JSON
+          
           addOBJnaLista(objeto.tipoArv)
-          // Atualizar as propriedades do objeto com os dados do arquivo JSON
-          //objetos[i].tipo = objeto.tipoArv; 
+          
           objetos[objects.length - 1].material.diffuse = objeto.material.diffuse;
           objetos[objects.length - 1].material.diffuseMap = textures.defaultWhite;
           objetos[objects.length - 1].material.ambient = objeto.material.ambient;
@@ -549,8 +529,7 @@ async function main() {
           objetos[objects.length - 1].material.emissive = objeto.material.emissive;
           objetos[objects.length - 1].material.opticalDensity = objeto.material.opticalDensity;
           objetos[objects.length - 1].material.illum = objeto.material.illum;
-  
-          // Atualizar a matriz (matriz de transformação 3D)
+
           objetos[objects.length - 1].uniforms.u_world[12] = objeto.matrix.positionX;
           objetos[objects.length - 1].uniforms.u_world[13] = objeto.matrix.positionY;
           objetos[objects.length - 1].uniforms.u_world[14] = objeto.matrix.positionZ;
@@ -571,10 +550,10 @@ async function main() {
         console.error('Erro ao ler o arquivo JSON:', error);
       };
       
-      reader.readAsText(file); // Lê o arquivo como texto
+      reader.readAsText(file); 
     };
   
-    input.click(); // Dispara o evento de seleção de arquivo
+    input.click();
   }
   
 
