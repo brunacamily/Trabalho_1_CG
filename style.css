@@ -204,6 +204,7 @@ body {
   
   border-radius: 10px; /* Deixa o botão com cantos arredondados */
   cursor: pointer; /* Mostra o ícone de mão ao passar o mouse */
+  background-color:   rgba(76, 175, 80, 0.5); 
   
   position: absolute;
   top: 550px; /* Distância do topo da página */
@@ -219,6 +220,7 @@ body {
   
   border-radius: 10px; /* Deixa o botão com cantos arredondados */
   cursor: pointer; /* Mostra o ícone de mão ao passar o mouse */
+  background-color:   rgba(76, 175, 80, 0.5); 
   
   position: absolute;
   top: 600px; /* Distância do topo da página */

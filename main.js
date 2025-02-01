@@ -1,8 +1,5 @@
 "use strict";
 
-// This is not a full .obj parser.
-// see http://paulbourke.net/dataformats/obj/
-
 function parseOBJ(text) {
   // because indices are base 1 let's just fill in the 0th data
   const objPositions = [[0, 0, 0]];
@@ -305,12 +302,8 @@ async function main() {
 
   // compila e vincula os shaders, localiza os atributos e as localizações dos uniformes
   const meshProgramInfo = twgl.createProgramInfo(gl, [vs, fs]);
-  //const pickingProgramInfo = twgl.createProgramInfo(gl, [pickingVS, pickingFS], options);
 
-
-  // procura as localizações dos uniforms
-
-  const objHref = ["Tree 1.obj", "Tree 2.obj", "Tree 3.obj", "Tree 4.obj", "Tree 5.obj"];  
+  const objHref = ["OBJs/Tree 1.obj", "OBJs/Tree2.obj", "OBJs/Tree 3.obj", "OBJs/Tree 4.obj", "OBJs/Tree 5.obj"];  
 
   //+++++++++++++++++++++++++++++++++
 
@@ -340,8 +333,6 @@ async function main() {
       return await matResponse.text();
     }));
     materials1[index] = parseMTL(matTexts1[index].join('\n'));
-
-
 
     // load texture for materials
     for (const material of Object.values(materials1[index])) {
@@ -428,51 +419,6 @@ async function main() {
     });
   }
 
-
-  function getExtents(positions) {
-    const min = positions.slice(0, 3);
-    const max = positions.slice(0, 3);
-    for (let i = 3; i < positions.length; i += 3) {
-      for (let j = 0; j < 3; ++j) {
-        const v = positions[i + j];
-        min[j] = Math.min(v, min[j]);
-        max[j] = Math.max(v, max[j]);
-      }
-    }
-    return {min, max};
-  }
-
-  function getGeometriesExtents(geometries) {
-    return geometries.reduce(({min, max}, {data}) => {
-      const minMax = getExtents(data.position);
-      return {
-        min: min.map((min, ndx) => Math.min(minMax.min[ndx], min)),
-        max: max.map((max, ndx) => Math.max(minMax.max[ndx], max)),
-      };
-    }, {
-      min: Array(3).fill(Number.POSITIVE_INFINITY),
-      max: Array(3).fill(Number.NEGATIVE_INFINITY),
-    });
-  }
-
-  const extents = getGeometriesExtents(obj1[0].geometries);
-  const range = m4.subtractVectors(extents.max, extents.min);
-
-  const cameraTarget = [0, 0, 0];
-  // calcular a distância necessária para mover a câmera para que
-  // possamos provavelmente ver o objeto.
-  const radius = m4.length(range) * 1.2;
-  const cameraPosition = m4.addVectors(cameraTarget, [ 0, 0, radius, ]);
-
-  // Define zNear e zFar para algo, com sorte, apropriado
-  // ao tamanho deste objeto.
-  const zNear = radius / 100;
-  const zFar = radius * 3;
-
-  function degToRad(deg) {
-    return deg * Math.PI / 180;
-  }
-
   // Função para desenhar os objetos
   function drawObjects(objectsToDraw) {
     objectsToDraw.forEach(function (object) {
@@ -489,30 +435,15 @@ async function main() {
     });
   }
 
-  function xRotationOBJ(index) {
-  // Aplica a rotação no eixo X à matriz u_world
-  objects[index].uniforms.u_world = m4.multiply(m4.rotationX(Math.PI / 4), objects[index].uniforms.u_world);
-  
-  }
-
   function xTranslationOBJ(index) {
-    //objects[5].uniforms.u_world =  m4.translation(5, 0, 0);
     return function(event, ui) {
       objects[index].uniforms.u_world[12] = ui.value;
     };
   }
 
   function yTranslationOBJ(index) {
-    //objects[5].uniforms.u_world =  m4.translation(5, 0, 0);
     return function(event, ui) {
       objects[index].uniforms.u_world[13] = ui.value;
-    };
-  }
-
-  function zTranslationOBJ(index) {
-    //objects[5].uniforms.u_world =  m4.translation(5, 0, 0);
-    return function(event, ui) {
-      objects[index].uniforms.u_world[14] = ui.value;
     };
   }
 
@@ -563,9 +494,6 @@ async function main() {
                 opticalDensity: objetos[i].material.opticalDensity , // Se não existir, assume 1.45
                 illum: objetos[i].material.illum
             }
-            
-
-
         };
 
         listaObjetos.push(obj);
@@ -637,8 +565,6 @@ async function main() {
           objetos[objects.length - 1].uniforms.u_world[9] = objeto.matrix.rotationZY;
           addNewButton();
         }
-  
-        console.log('Objetos carregados:', objetos);
       };
       
       reader.onerror = (error) => {
@@ -692,7 +618,6 @@ async function main() {
       // Adiciona um evento de clique ao botão recém-criado
       button.addEventListener("click", function() {
           mudançasOBJ(buttonCount + 4);
-          //console.log(indexOBJ )
       });
 
       // Adiciona o botão ao container
@@ -730,14 +655,13 @@ async function main() {
     newButton.addEventListener("click", function () {
         let angle = Math.PI / 8; // 22,5 graus
         objects[indexOBJ].uniforms.u_world = m4.yRotate(objects[indexOBJ].uniforms.u_world, angle);
-        console.log('bruna');
     });
 
 
     // ---- TEXTURA
     let textureButton = document.getElementById("texture");
 
-    // Remove todos os event listeners anteriores para evitar múltiplas execuções
+    // Remove todos os event listeners anteriores para evitar múltiplas execuções, pq estava clicando 2x
     let newButtont = textureButton.cloneNode(true);
     textureButton.parentNode.replaceChild(newButtont, textureButton);
 
@@ -747,15 +671,54 @@ async function main() {
         objects[indexOBJ].material.diffuse = [1,0,0];
        else 
         objects[indexOBJ].material.diffuse = objects[objects[indexOBJ].tipo].material.diffuse ;   
-
-      console.log(objects[indexOBJ].mat);
-
-
     } );
-
   }
 
-  /// ===========
+  
+  function getExtents(positions) {
+    const min = positions.slice(0, 3);
+    const max = positions.slice(0, 3);
+    for (let i = 3; i < positions.length; i += 3) {
+      for (let j = 0; j < 3; ++j) {
+        const v = positions[i + j];
+        min[j] = Math.min(v, min[j]);
+        max[j] = Math.max(v, max[j]);
+      }
+    }
+    return {min, max};
+  }
+
+  function getGeometriesExtents(geometries) {
+    return geometries.reduce(({min, max}, {data}) => {
+      const minMax = getExtents(data.position);
+      return {
+        min: min.map((min, ndx) => Math.min(minMax.min[ndx], min)),
+        max: max.map((max, ndx) => Math.max(minMax.max[ndx], max)),
+      };
+    }, {
+      min: Array(3).fill(Number.POSITIVE_INFINITY),
+      max: Array(3).fill(Number.NEGATIVE_INFINITY),
+    });
+  }
+
+  const extents = getGeometriesExtents(obj1[0].geometries);
+  const range = m4.subtractVectors(extents.max, extents.min);
+
+  const cameraTarget = [0, 0, 0];
+  // calcular a distância necessária para mover a câmera para que
+  // possamos provavelmente ver o objeto.
+  const radius = m4.length(range) * 1.2;
+  const cameraPosition = m4.addVectors(cameraTarget, [ 0, 0, radius, ]);
+
+  // Define zNear e zFar para algo, com sorte, apropriado
+  // ao tamanho deste objeto.
+  const zNear = radius / 100;
+  const zFar = radius * 3;
+
+  function degToRad(deg) {
+    return deg * Math.PI / 180;
+  }
+
 
   function render(time) {
     time *= 0.0005;
@@ -776,7 +739,6 @@ async function main() {
 
 
     // colocando os uniforms em object.uniform
-
     objects.forEach(function(object) {
       object.uniforms.u_lightDirection =  m4.normalize([-1, 3, 5]),
       object.uniforms.u_view = view,
@@ -784,14 +746,12 @@ async function main() {
       object.uniforms.u_viewWorldPosition = cameraPosition
     });
 
-
+    // objetos que ficam sob os botões
     objects[0].uniforms.u_world = m4.multiply(m4.scaling(0.48, 0.48, 0), m4.translation(23, 9, 0));
     objects[1].uniforms.u_world = m4.multiply(m4.scaling(0.34, 0.34, 0), m4.translation(42, 12, 0));
     objects[2].uniforms.u_world = m4.multiply(m4.scaling(0.23, 0.23, 0), m4.translation(47, -5, 0));
     objects[3].uniforms.u_world =  m4.multiply(m4.scaling(0.2, 0.2, 0), m4.translation(71, -6, 0));
     objects[4].uniforms.u_world = m4.multiply(m4.scaling(0.75, 0.75, 0), m4.translation(16.5, -8.5, 0));
-
-    //console.log(buttonCount);
 
    // ------ Desenhar os objetos no canvas
 
@@ -804,7 +764,6 @@ async function main() {
     requestAnimationFrame(render);
   }
   requestAnimationFrame(render);
-
 
 }
 
